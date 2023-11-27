@@ -3,6 +3,7 @@
 #include <random>
 #include "rect.h"
 #include "../const/skyconst.h"
+#include "../const/actionwindow.h"
 
 class Sky
 {

@@ -1,4 +1,4 @@
-#include "core.h"
+#include "types/core/game.h"
 
 
 int main(int argc, char* argv[])

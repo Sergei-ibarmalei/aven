@@ -3,7 +3,7 @@
 #include "texture.h"
 #include "eshelon.h"
 #include "enums/enumobjectstatus.h"
-#include "const/actionwindow.h"
+#include "../const/actionwindow.h"
 
 
 class SimpleObject : public Object, public Init

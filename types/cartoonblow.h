@@ -2,9 +2,10 @@
 
 #include "cartoonobject.h"
 #include "texturestore.h"
+#include "../const/frames.h"
 
 
-constexpr int BLOW_FRAMES {7};
+
 
 class CartoonBlow : public CartoonObject
 {
