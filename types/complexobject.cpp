@@ -6,7 +6,7 @@ ComplexObject::ComplexObject(const Texture* t,
     const int objectMainRectNomber) :
     SimpleObject(t, start, objectMainRectNomber)
 {
-    if (SimpleObject::init_ok == false) return;
+    if (SimpleObject::Init_ok() == false) return;
 }
 
 

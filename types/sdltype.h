@@ -8,20 +8,21 @@
 #include "../const/fontconst.h"
 
 
-class Sdl : public Init
+class Sdl 
 {
 private:
+    Init init;
     SDL_Renderer* renderer = nullptr;
     SDL_Window* window = nullptr;
     SDL_Event      e{};
     TTF_Font** fontsArray = nullptr;
     int        fontsArrayLength {0};
 
-    bool init(const char* appName, const int w, const int h);
+    bool initSdl(const char* appName, const int w, const int h);
     bool initFontsArray();
 
 public:
-    Sdl(const char* name);
+    explicit Sdl(const char* name);
     ~Sdl();
     Sdl(const Sdl&) = delete;
     Sdl& operator=(const Sdl&) = delete;
@@ -30,5 +31,6 @@ public:
 
     Texture* MakeTexture(const char* texturePath, enumTextureType textureType);
     Texture* MakeTexture(enumGameFonts gameFonts, const char* textToTexture);
+    bool Init_ok() const {return init.Init_ok();}
 
 };

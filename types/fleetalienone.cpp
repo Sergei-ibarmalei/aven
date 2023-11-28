@@ -9,8 +9,7 @@ Fleet_AlienOne::Fleet_AlienOne(std::mt19937& mt,
     {
         case enumFleetKind::alienOneFleet:
         {
-            init_ok =
-                makeFleetOne(mt, store->operator[](enumTextureType::ships));
+            init.Set(makeFleetOne(mt, store->operator[](enumTextureType::ships)));
             break;
         }
         default: {}

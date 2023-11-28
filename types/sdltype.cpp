@@ -2,13 +2,13 @@
 
 Sdl::Sdl(const char* appName)
 {
-    appName == nullptr ? init_ok = false : init_ok = init(appName,
-        MAINWINDOW_W, MAINWINDOW_H);
+    appName == nullptr ? init.Negate() : init.Set(initSdl(appName,
+        MAINWINDOW_W, MAINWINDOW_H));
 }
 
 
 
-bool Sdl::init(const char* appName, const int w, const int h)
+bool Sdl::initSdl(const char* appName, const int w, const int h)
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) return false;
     if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) return false;
@@ -22,8 +22,7 @@ bool Sdl::init(const char* appName, const int w, const int h)
     if (!window)
     {
         std::cout << "Cannot initialize window, abort.\n";
-        init_ok = false;
-        return init_ok;
+        init.Negate(); return false;
     }
 
     renderer = SDL_CreateRenderer(window,
@@ -33,8 +32,7 @@ bool Sdl::init(const char* appName, const int w, const int h)
     if (!renderer)
     {
         std::cout << "Cannot initiate renderer, abort.\n";
-        init_ok = false;
-        return init_ok;
+        init.Negate(); return false;
     }
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
 
@@ -42,8 +40,7 @@ bool Sdl::init(const char* appName, const int w, const int h)
     if (!(IMG_Init(imgFlags) & imgFlags))
     {
         std::cout << "SDL_image could not initialize, abort.\n";
-        init_ok = false;
-        return init_ok;
+        init.Negate(); return false;
     }
 
     if (TTF_Init() == -1)

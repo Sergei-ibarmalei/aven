@@ -5,13 +5,13 @@ UItext::UItext(const TextureStore* store)
 #define int_ static_cast<int>
     if (!store)
     {
-        init_ok = false; return;
+        init.Negate(); return;
     }
     //Стартовые точки для текстур из текста
     initStartsPos(store);
     uiTextVector = new SimpleObject *
         [int_(enumGameFonts::all)] {nullptr};
-    if (!initUiTextVector(store)) init_ok = false;
+    if (!initUiTextVector(store)) init.Negate();
 #undef int_
 }
 

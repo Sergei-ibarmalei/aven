@@ -10,7 +10,7 @@ Alien_one::Alien_one(const Texture* t,
                        static_cast<int>(enumShipKind::alien_one),
                        objectScore)
 {
-    if (Ship::init_ok == false) return;
+    if (Ship::Init_ok() == false) return;
     fillCollide();
     this->objectVelocity.x = ALIENONEFLEET_VEL;
     alienShooting = new AlienStrightShooting {ALIENONE_STEPTOSHOOT};

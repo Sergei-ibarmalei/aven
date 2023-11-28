@@ -10,6 +10,8 @@
 
 class Fleet_AlienOne : public FleetBase
 {
+private:
+    Init init;
 protected:
     bool makeFleetOne(std::mt19937& mt, const Texture* t);
 public:
@@ -18,5 +20,6 @@ public:
         const TextureStore* store,
         enumFleetKind kind,
         const int fleetSize);
+    bool Init_ok() const {return init.Init_ok();}
 };
 
