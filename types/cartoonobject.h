@@ -12,8 +12,8 @@ protected:
     int currentFrame{ 1 };
     int allFrames{ 0 };
     enumObjectStatus objectStatus = enumObjectStatus::isOnScreen;
-    std::vector<Rect*> textureMainRects{ nullptr };
-    std::vector<Rect*> objectMainRects{ nullptr };
+    Rect** textureMainRects {nullptr};
+    Rect** objectMainRects  {nullptr};
     void initRects(const Texture* t, const Plot& center);
 
     CartoonObject(const Plot& center,
@@ -28,11 +28,9 @@ public:
 
     void Tick();
     enumObjectStatus ObjectStatus() const { return objectStatus; }
-    const std::vector<Rect*>& SourceRects() { return textureMainRects; }
-    const std::vector<Rect*>& DestRects() { return objectMainRects; }
     SDL_Rect* CurrentSourceRect() const 
-        { return textureMainRects[this->currentFrame]; }
+        { return textureMainRects[currentFrame-1]; }
     SDL_Rect* CurrentDestRect() const 
-        { return objectMainRects[this->currentFrame]; }
+        { return objectMainRects[currentFrame-1]; }
     bool Init_ok() const {return init.Init_ok();}
 };
