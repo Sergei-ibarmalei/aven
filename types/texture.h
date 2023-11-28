@@ -37,6 +37,8 @@ public:
     ~Texture();
     Texture& operator=(const Texture&) = delete;
     Texture(const Texture&) = delete;
+    
+    //Get mainRectVector[index]
     Rect* operator[](const int index) const;
     SDL_Texture* GetTexture() const { return sdlTexture; }
     bool Init_ok() const {return init.Init_ok();}
