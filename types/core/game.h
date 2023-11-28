@@ -17,6 +17,7 @@
 #include "../cartoonblow.h"
 #include "../../const/frames.h"
 #include "../../video_/video.h"
+#include "../enums/enumgameparts.h"
 
 class Game
 {
@@ -69,11 +70,11 @@ private:
 	void drawPartOnePause();
 	void drawGameOver();
 
-	bool restartCore();
+	bool restartCore(enumGameParts gamePart);
 
 	void partOneAfterHeroCrash();
 	bool reinitAlienFleetOne(const int size);
-	void deletingFleet(FleetBase* fleet);
+	void deletingFleet(enumFleetKind fleet);
 	void cleaningStoreLaser(Node<Laser>* n);
 	bool reincarnateHero();
 

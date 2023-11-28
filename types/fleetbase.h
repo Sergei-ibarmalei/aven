@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include "ship.h"
 
 
@@ -9,7 +8,8 @@ class FleetBase
 {
 protected:
     Init init;
-    std::vector<Ship*> fleetVector;
+    Ship** fleetVector {nullptr};
+    int    fleetVectorLength {0};
     int currentFleetSize{};
     bool fleetIsOver{ false };
     explicit FleetBase(const int size);
@@ -17,10 +17,13 @@ protected:
     FleetBase& operator=(const FleetBase&) = delete;
 public:
     ~FleetBase();
-    std::vector<Ship*>& GetFleet() { return fleetVector; }
     void DecCurrentFleetSize() {currentFleetSize -= 1;}
     int GetCurrentFleetSize() const { return currentFleetSize; }
+    int GetFleetVectorLength() const {return fleetVectorLength;}
     bool IsFleetOver() const { return fleetIsOver; }
     bool Init_ok() const {return init.Init_ok();}
+    Ship* operator[](const int index);
+    void deleting();
+    
 
 };

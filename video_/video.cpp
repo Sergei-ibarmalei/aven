@@ -80,9 +80,13 @@ void DrawCartoons(Sdl* sdl, Node<CartoonObject>* n, const Texture* t)
 
 void DrawAlienOneFleetV(Sdl* sdl, FleetBase* f, const Texture* t)
 {
-    for (auto& ship : f->GetFleet())
+    /*for (auto& ship : f->GetFleet())
     {
         DrawComplexObject(sdl, ship, t);
+    }*/
+    for (auto ship = 0; ship < f->GetFleetVectorLength(); ++ship)
+    {
+        DrawComplexObject(sdl, f->operator[](ship), t);
     }
 }
 

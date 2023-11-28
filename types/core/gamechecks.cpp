@@ -32,45 +32,54 @@ void Game::checkHeroVSLaser(Node<Laser>* n)
 void Game::checkFirstFleetVSLaser(Node<Laser>* n)
 {
 	if (n == nullptr) return;
-	for (auto& ship: fleet_AlienOne->GetFleet())
+	for (auto ship = 0; ship < fleet_AlienOne->GetFleetVectorLength(); ++ship)
 	{
-		if (ship->ObjectStatus() == enumObjectStatus::isReady) break;
-		if (ship->ObjectStatus() == enumObjectStatus::isCrashed) continue;
-
-		if (*n->object == *ship)
+		if (fleet_AlienOne->operator[](ship)->ObjectStatus() ==
+			enumObjectStatus::isReady) break;
+		if (fleet_AlienOne->operator[](ship)->ObjectStatus() ==
+			enumObjectStatus::isCrashed) continue;
+		if (*n->object == *fleet_AlienOne->operator[](ship))
 		{
-            ship->NowIsCrashed();
-            fleet_AlienOne->DecCurrentFleetSize();
-            hud_score->SetScore(ship->GetScore());
-            n->object->NowIsCrashed();
-            storeCartoon->
-				Push(new CartoonBlow(textureStore, ship->GetCenter()));
+			fleet_AlienOne->operator[](ship)->NowIsCrashed();
+			fleet_AlienOne->DecCurrentFleetSize();
+			hud_score->SetScore(fleet_AlienOne->operator[](ship)->GetScore());
+			n->object->NowIsCrashed();
+			storeCartoon->
+				Push(new CartoonBlow(textureStore, 
+					fleet_AlienOne->operator[](ship)->GetCenter()));
 		}
+
 	}
 	checkFirstFleetVSLaser(n->next);
-
 }
 
 //проверка первого флота на возможность выстрела
 void Game::checkFirstFleetMayShoot()
 {
-	for (auto& ship: fleet_AlienOne->GetFleet())
-	{
-		if (ship->ObjectStatus() == enumObjectStatus::isReady) break;
-		if (ship->ObjectStatus() == enumObjectStatus::isCrashed) continue;
 
+	for (auto ship = 0; ship < fleet_AlienOne->GetFleetVectorLength(); ++ship)
+	{
+		if (fleet_AlienOne->operator[](ship)->ObjectStatus() ==
+			enumObjectStatus::isReady) return;
+		if (fleet_AlienOne->operator[](ship)->ObjectStatus() ==
+			enumObjectStatus::isCrashed) continue;
 		//если алиен может выстрелить и находится в эшелоне героя
-		if (static_cast<Alien_one*>(ship)->ThisAlienMayShoot() &&
-			ship->InEshelon(hero->GetHeroEshelon()))
+		if (static_cast<Alien_one*>(fleet_AlienOne->operator[](ship))->
+			ThisAlienMayShoot() &&
+			fleet_AlienOne->operator[](ship)->InEshelon(hero->GetHeroEshelon()))
 		{
 			//если пролетел героя, то не стреляет
-			if (ship->GetCenter().x < hero->GetCenter().x) continue;
+			if (fleet_AlienOne->operator[](ship)->GetCenter().x <
+				hero->GetCenter().x) continue;
+			
+			//алиен делает выстрел
+			firstfleetStoreLaser->Push(new FirstFleetAlienLaser {
+				textureStore->operator[](enumTextureType::lasersPack),
+				*fleet_AlienOne->operator[](ship)->GetLaserStart()});
 
-			//Делаем выстрел
-			firstfleetStoreLaser->Push(new FirstFleetAlienLaser{textureStore->
-			operator[](enumTextureType::lasersPack), *ship->GetLaserStart()});
-			//Запрещаем делать выстрел до следующего раза
-			static_cast<Alien_one*>(ship)->ThisAlienCantShoot();
+			//запрещаем делать выстрел алиену до следующего раза
+			static_cast<Alien_one*>(fleet_AlienOne->
+				operator[](ship))->ThisAlienCantShoot();
 		}
 	}
 }

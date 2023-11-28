@@ -80,7 +80,7 @@ void Game::inPartOne()
 	if (restart_flag)
 	{
 		restart_flag = false;
-		if (!restartCore())
+		if (!restartCore(enumGameParts::part_one))
 		{
 			gameState->toSystem = true; return;
 		}
@@ -92,7 +92,7 @@ void Game::inPartOne()
 		{
 			partOneGameOver();
 			if (gameState->toSystem) return;
-			if (!restartCore())
+			if (!restartCore(enumGameParts::part_one))
 			{
 				gameState->toSystem = true; return;
 			}
@@ -304,7 +304,7 @@ void Game::partOneAfterHeroCrash()
 	cleaningStoreLaser(firstfleetStoreLaser->First());
 	heroStoreLaser->CheckStoreForGone();
 	firstfleetStoreLaser->CheckStoreForGone();
-	deletingFleet(fleet_AlienOne);
+	deletingFleet(enumFleetKind::alienOneFleet);
 	if (!reinitAlienFleetOne(currentFleetSize))
 	{
 		gameState->gameOver = true; return;

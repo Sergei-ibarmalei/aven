@@ -27,7 +27,7 @@ Game::~Game()
 	delete gameState;      		 gameState = nullptr;
 }
 
-bool Game::restartCore()
+bool Game::restartCore(enumGameParts gamePart)
 {
 	cleaningStoreLaser(heroStoreLaser->First());
 	cleaningStoreLaser(firstfleetStoreLaser->First());
@@ -35,7 +35,15 @@ bool Game::restartCore()
 	firstfleetStoreLaser->CheckStoreForGone();
 	delete storeCartoon; storeCartoon = nullptr;
 	storeCartoon = new StoreCartoon<CartoonObject>;
-	deletingFleet(fleet_AlienOne);
+	switch (gamePart)
+	{
+		case enumGameParts::part_one:
+		{
+			deletingFleet(enumFleetKind::alienOneFleet);
+			break;
+		}
+		default: {}
+	}
 	if (!reinitAlienFleetOne(ALIENONEFLEET_SIZE)) return false;
 	if (!reincarnateHero()) return false;
 
@@ -68,25 +76,28 @@ void Game::doBlowHero()
 
 void Game::firstFleetMove()
 {
-	for (auto& ship: fleet_AlienOne->GetFleet())
+#define alien fleet_AlienOne->operator[](ship)
+
+	for (auto ship = 0; ship < fleet_AlienOne->GetFleetVectorLength(); ++ship)
 	{
-		ship->Move();
-		if (gameState->heroState.hero_isAlive &&  *hero == *ship)
+		alien->Move();
+		if (gameState->heroState.hero_isAlive && *hero == *alien)
 		{
-			ship->NowIsCrashed();
+			alien->NowIsCrashed();
 			hero->NowIsCrashed();
 			hud_lives->DecHeroLives();
 			if (hud_lives->GetHeroLives() < 1)
 			{
 				storeCartoon->Push(new CartoonBlow{textureStore,
-				hero->GetCenter()});
+					hero->GetCenter()});
 				storeCartoon->Push(new CartoonBlow{textureStore,
-				ship->GetCenter()});
+					alien->GetCenter()});
 				gameState->gameOver = true;
 			}
 			return;
 		}
 	}
+#undef alien
 }
 
 bool Game::reinitAlienFleetOne(const int fleetsize)
@@ -99,18 +110,27 @@ bool Game::reinitAlienFleetOne(const int fleetsize)
 	return true; 
 }
 
-void Game::deletingFleet(FleetBase* fleet)
+void Game::deletingFleet(enumFleetKind fleetKind)
 {
-	for (auto ship: fleet->GetFleet())
+	switch (fleetKind)
 	{
-		if (ship->ObjectStatus() != enumObjectStatus::isOnScreen) continue;
-		ship->NowIsCrashed();
+		case enumFleetKind::alienOneFleet:
+		{
+#define alien fleet_AlienOne->operator[](ship)
+
+			for (auto ship = 0; 
+			     	ship < fleet_AlienOne->GetFleetVectorLength(); ++ship)
+			{
+				if (alien->ObjectStatus() != enumObjectStatus::isOnScreen) 
+					continue;
+				alien->NowIsCrashed();
+			}
+			fleet_AlienOne->deleting();
+			break;
+#undef alien
+		}
+		default: {}
 	}
-	for (auto& ship: fleet->GetFleet())
-	{
-		delete ship; ship = nullptr;
-	}
-	delete fleet; fleet = nullptr;
 }
 
 void Game::cleaningStoreLaser(Node<Laser>* n)

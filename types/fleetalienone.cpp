@@ -9,7 +9,8 @@ Fleet_AlienOne::Fleet_AlienOne(std::mt19937& mt,
     {
         case enumFleetKind::alienOneFleet:
         {
-            init.Set(makeFleetOne(mt, store->operator[](enumTextureType::ships)));
+            init.Set(
+                makeFleetOne(mt, store->operator[](enumTextureType::ships)));
             break;
         }
         default: {}
@@ -28,19 +29,20 @@ bool Fleet_AlienOne::makeFleetOne(std::mt19937& mt, const Texture* t)
     Plot start{ 0, 0 };
 
     std::uniform_int_distribution<int> y{ ceiling, floor };
-
-    for (auto a = 0; a < this->currentFleetSize; a++)
+    fleetVector = new Ship * [fleetVectorLength] {nullptr};
+    for (auto fleetShip = 0; fleetShip < this->currentFleetSize; ++fleetShip)
     {
-        start.x = startPoint + step * a;
+        start.x = startPoint + step * fleetShip;
         start.y = y(mt);
-        auto ship = new Alien_one(t, start, ALIENONE_SCORE);
-        if (ship->Init_ok() == false) return false;
-        this->fleetVector.push_back(ship);
-
-
+        //auto ship = new Alien_one(t, start, ALIENONE_SCORE);
+        //if (ship->Init_ok() == false) return false;
+        //this->fleetVector.push_back(ship);
+        fleetVector[fleetShip] = new Alien_one{t, start, ALIENONE_SCORE};
+        if (fleetVector[fleetShip]->Init_ok() == false)
+        {
+            init.Negate(); return false;
+        }
     }
-
-
     return true;
 }
 
