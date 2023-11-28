@@ -7,3 +7,9 @@ std::ostream& operator<<(std::ostream& os, const Rect& r)
     return os;
 }
 
+std::ostream& operator<<(std::ostream& os, const Plot& p)
+{
+    os << "[x: " << p.x << ", y: " << p.y << "]\n";
+    return os;
+}
+

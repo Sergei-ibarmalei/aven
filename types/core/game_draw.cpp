@@ -171,54 +171,45 @@ void Game::draw_Sky()
 void Game::draw_MainMenu()
 {
 #define int_ static_cast<int>
-    switch (this->mainmenu->GetChoise())
+    switch (mainmenu->GetChoise())
     {
         case int_(enumMainMenuChoise::new_game):
         {
             DrawSimpleObject(sdl,
-                *this->mainmenu->
-                    GetMainMenu()[int_(enumTextingOrder::red_newgame)], 
-                this->textureStore->operator[](enumTextureType::mainmenuText));
+                *mainmenu->operator[](enumTextingOrder::red_newgame),
+                textureStore->operator[](enumTextureType::mainmenuText));
             DrawSimpleObject(sdl,
-                *this->mainmenu->
-                    GetMainMenu()[int_(enumTextingOrder::black_rules)], 
-                this->textureStore->operator[](enumTextureType::mainmenuText));
+                *mainmenu->operator[](enumTextingOrder::black_rules),
+                textureStore->operator[](enumTextureType::mainmenuText));
             DrawSimpleObject(sdl,
-                *this->mainmenu->
-                    GetMainMenu()[int_(enumTextingOrder::black_exit)], 
-                this->textureStore->operator[](enumTextureType::mainmenuText));
+                *mainmenu->operator[](enumTextingOrder::black_exit),
+                textureStore->operator[](enumTextureType::mainmenuText));
             break;
         }
         case int_(enumMainMenuChoise::rules):
         {
             DrawSimpleObject(sdl,
-                *this->mainmenu->
-                    GetMainMenu()[int_(enumTextingOrder::black_newgame)], 
-                this->textureStore->operator[](enumTextureType::mainmenuText));
+                *mainmenu->operator[](enumTextingOrder::black_newgame),
+                textureStore->operator[](enumTextureType::mainmenuText));
             DrawSimpleObject(sdl,
-                *this->mainmenu->
-                    GetMainMenu()[int_(enumTextingOrder::red_rules)],
-                this->textureStore->operator[](enumTextureType::mainmenuText));
+                *mainmenu->operator[](enumTextingOrder::red_rules),
+                textureStore->operator[](enumTextureType::mainmenuText));
             DrawSimpleObject(sdl,
-                *this->mainmenu->
-                    GetMainMenu()[int_(enumTextingOrder::black_exit)], 
-                this->textureStore->operator[](enumTextureType::mainmenuText));
+                *mainmenu->operator[](enumTextingOrder::black_exit),
+                textureStore->operator[](enumTextureType::mainmenuText));
             break;
         }
         case int_(enumMainMenuChoise::exit):
         {
             DrawSimpleObject(sdl,
-                *this->mainmenu->
-                    GetMainMenu()[int_(enumTextingOrder::black_newgame)], 
-                this->textureStore->operator[](enumTextureType::mainmenuText));
+                *mainmenu->operator[](enumTextingOrder::black_newgame),
+                textureStore->operator[](enumTextureType::mainmenuText));
             DrawSimpleObject(sdl,
-                *this->mainmenu->
-                    GetMainMenu()[int_(enumTextingOrder::black_rules)], 
-                this->textureStore->operator[](enumTextureType::mainmenuText));
+                *mainmenu->operator[](enumTextingOrder::black_rules),
+                textureStore->operator[](enumTextureType::mainmenuText));
             DrawSimpleObject(sdl,
-                *this->mainmenu->
-                    GetMainMenu()[int_(enumTextingOrder::red_exit)], 
-                this->textureStore->operator[](enumTextureType::mainmenuText));
+                *mainmenu->operator[](enumTextingOrder::red_exit),
+                textureStore->operator[](enumTextureType::mainmenuText));
             break;
         }
     }
@@ -244,7 +235,7 @@ void Game::drawGameOver()
 
 void Game::drawPartOnePause()
 {
-		sky->Move(this->mt);
+		sky->Move(mt);
 		draw_Sky();
 		DrawComplexObject(sdl,
 			hero,

@@ -28,5 +28,7 @@ struct Rect : public SDL_Rect
 struct Plot
 {
     int x, y;
+
+    friend std::ostream& operator<<(std::ostream& os, const Plot& p);
 };
 
