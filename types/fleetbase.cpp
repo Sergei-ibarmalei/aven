@@ -4,7 +4,7 @@ FleetBase::FleetBase(const int size)
 {
     if (size <= 0)
     {
-        init_ok = false; return;
+        init.Negate(); return;
     }
     this->currentFleetSize = size;
 

@@ -3,12 +3,12 @@
 
 TextureStore::TextureStore(Sdl* sdl)
 {
-    if (!sdl) { init_ok = false; return; }
+    if (!sdl) { init.Negate(); return; }
     storeLength = static_cast<int>(enumTextureType::all);
     store = new Texture * [storeLength] {nullptr};
     if (!fillStore(sdl))
     {
-        init_ok = false;
+        init.Negate();
     }
 }
 

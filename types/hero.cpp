@@ -17,7 +17,7 @@ Hero::Hero(const Texture* t, const Plot& start) :
     Ship(enumShipKind::hero, t, start, static_cast<int>(enumShipKind::hero))
 {
 
-    if (Ship::init_ok == false) return;
+    if (Ship::Init_ok() == false) return;
     fillCollide();
     heroStopIntro = MAINWINDOW_H >> 2;
 }

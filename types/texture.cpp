@@ -8,8 +8,7 @@ Texture::Texture(SDL_Texture* t,
 
     if (!t || !rectsVector || rectsVectorLength <= 0)
     {
-        init_ok = false;
-        return;
+        init.Negate(); return;
     }
     sdlTexture = t;
     mainRectsVector = rectsVector;
@@ -25,8 +24,7 @@ Texture::Texture(SDL_Texture* t,
 {
     if (!t || !rectsVector || !surface)
     {
-        init_ok = false;
-        return;
+        init.Negate(); return;
     }
     sdlTexture = t;
     mainRectsVector = rectsVector;
@@ -172,7 +170,7 @@ void Texture::initMainRectsVector(enumTextureType textureType)
             break;
         }
 
-        default: {init_ok = false; }
+        default: {init.Negate(); }
 
     }
 #undef int_

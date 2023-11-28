@@ -15,9 +15,10 @@
 
 
 
-class Texture : public Init
+class Texture 
 {
 private:
+    Init init;
     SDL_Texture* sdlTexture = nullptr;
     Rect** mainRectsVector = nullptr;
     int   mainRectsVectorLength = 0;
@@ -38,5 +39,6 @@ public:
     Texture(const Texture&) = delete;
     Rect* operator[](const int index) const;
     SDL_Texture* GetTexture() const { return sdlTexture; }
+    bool Init_ok() const {return init.Init_ok();}
 
 };

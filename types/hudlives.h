@@ -5,9 +5,10 @@
 #include "enums/enumhudlives.h"
 #include "enums/enumhudlivesposition.h"
 
-class HUD_lives : public Init
+class HUD_lives
 {
 private:
+    Init init;
     const Plot live_half{ 46, 50 };
     const Plot dead_half{ 45, 49 };
 
@@ -41,5 +42,6 @@ public:
     int GetHeroLives() const { return heroLives; }
     void DecHeroLives() { heroLives -= 1; }
     void Reinit();
+    bool Init_ok() const {return init.Init_ok();}
 
 };

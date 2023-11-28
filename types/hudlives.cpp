@@ -6,7 +6,7 @@ HUD_lives::HUD_lives(const Texture* t)
 #define int_ static_cast<int>
     if (!t)
     {
-        init_ok = false; return;
+        init.Negate(); return;
     }
     setCenters();
     setLivesThree(centers, t);

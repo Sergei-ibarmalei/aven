@@ -6,13 +6,13 @@ SimpleObject::SimpleObject(const Texture* t,
 {
     if (!t)
     {
-        init_ok = false; return;
+        init.Negate(); return;
     }
     this->objectMainRect = new Rect{ 0, 0, 0, 0 };
     this->startPos = start;
     if (!setMainRectFromTexture(t->operator[](objectMainRectNomber)))
     {
-        init_ok = false; return;
+        init.Negate(); return;
     }
     initObjectMainRect();
 }

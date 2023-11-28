@@ -7,4 +7,5 @@ protected:
 
 public:
 	bool Init_ok() const { return init_ok; }
+	void Negate() {init_ok = false;}
 };

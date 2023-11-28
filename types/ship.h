@@ -8,6 +8,9 @@
 
 class Ship : public ComplexObject, public ScoreBase
 {
+private:
+    Init init;
+
 protected:
     Plot* laserStartPos = nullptr;
     Plot* setLaserStartPos(enumShipKind kind);
@@ -29,4 +32,5 @@ public:
     Rect* GetShipMainRect() const {return objectMainRect;}
 
     bool InEshelon(const Eshelon& e);
+    bool Init_ok() const {return init.Init_ok();}
 };

@@ -5,9 +5,10 @@
 
 
 
-class FleetBase : public Init
+class FleetBase
 {
 protected:
+    Init init;
     std::vector<Ship*> fleetVector;
     int currentFleetSize{};
     bool fleetIsOver{ false };
@@ -20,5 +21,6 @@ public:
     void DecCurrentFleetSize() {currentFleetSize -= 1;}
     int GetCurrentFleetSize() const { return currentFleetSize; }
     bool IsFleetOver() const { return fleetIsOver; }
+    bool Init_ok() const {return init.Init_ok();}
 
 };

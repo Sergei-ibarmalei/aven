@@ -3,7 +3,7 @@
 
 MainMenu::MainMenu(const Texture* t)
 {
-    if (!t) { init_ok = false; return; }
+    if (!t) { init.Negate(); return; }
     initStartPoints(t);
     initVector(t);
 }

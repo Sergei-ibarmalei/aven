@@ -5,9 +5,10 @@
 #include "textobject.h"
 #include "enums/enummainmenuchoise.h"
 
-class MainMenu : public Init
+class MainMenu
 {
 private:
+    Init init;
     std::vector<SimpleObject*> mm_vector;
     std::vector<Plot> startPoints;
     int menuChoise{ 0 };
@@ -19,6 +20,7 @@ public:
     void PrevChoise();
     const std::vector<SimpleObject*>& GetMainMenu() const { return mm_vector; }
     int GetChoise() const { return menuChoise; }
+    bool Init_ok() const {return init.Init_ok();}
     ~MainMenu();
 };
 

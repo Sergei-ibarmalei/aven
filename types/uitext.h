@@ -8,9 +8,10 @@
 //PAUSE, Press Q to exit.. etc
 
 
-class UItext: public Init
+class UItext
 {
     private:
+    Init init;
     SimpleObject** uiTextVector = nullptr;
     Plot startPos[static_cast<int>(enumGameFonts::all)] {0, 0};
 
@@ -21,5 +22,6 @@ class UItext: public Init
     UItext(const TextureStore* store);
     ~UItext();
     SimpleObject* operator[](const enumGameFonts gameFont);
+    bool Init_ok() const {return init.Init_ok();}
 };
 

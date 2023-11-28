@@ -7,7 +7,10 @@ Ship::Ship(enumShipKind shipKind, const Texture* t,
     const int objectScore) :
     ComplexObject(t, start, objectMainRectNomber), ScoreBase(objectScore)
 {
-    if (SimpleObject::init_ok == false) return;
+    if (SimpleObject::Init_ok() == false) 
+    {
+        init.Negate(); return;
+    }
     this->laserStartPos = setLaserStartPos(shipKind);
     initCollideVector(shipKind);
 

@@ -6,9 +6,10 @@
 #include "../const/actionwindow.h"
 
 
-class SimpleObject : public Object, public Init
+class SimpleObject : public Object
 {
 protected:
+    Init              init;
     enumObjectStatus  objectStatus = enumObjectStatus::isReady;
     Plot startPos{ 0, 0 };
     Plot objectCenter{ 0, 0 };
@@ -34,4 +35,5 @@ public:
     void NowIsCrashed() { this->objectStatus = enumObjectStatus::isCrashed; }
     friend std::ostream& operator<<(std::ostream& os, const SimpleObject& o);
     bool InEshelon(const Eshelon& e);
+    bool Init_ok() const {return init.Init_ok();}
 };

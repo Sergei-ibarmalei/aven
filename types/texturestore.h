@@ -5,7 +5,7 @@
 #include "sdltype.h"
 
 
-class TextureStore : public Init
+class TextureStore
 {
 private:
     const char* gameTexturesPaths[13] =  {
@@ -23,6 +23,7 @@ private:
     "AD",
     "GAME OVER"
 };
+    Init init;
     Texture** store = nullptr;
     int       storeLength = 0;
     bool      fillStore(Sdl* sdl);
@@ -33,5 +34,6 @@ public:
 
     Texture* operator[](enumTextureType textureType) const;
     ~TextureStore();
+    bool Init_ok() const {return init.Init_ok();}
 
 };

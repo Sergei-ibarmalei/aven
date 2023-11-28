@@ -5,7 +5,7 @@ CartoonObject::CartoonObject(const Plot& center, const Texture* t,
 {
     if (!t || nomberFrames <= 0)
     {
-        init_ok = false; return;
+        init.Negate(); return;
     }
     this->allFrames = nomberFrames;
     initRects(t, center);

@@ -5,9 +5,10 @@
 #include "enums/enumobjectstatus.h"
 
 
-class CartoonObject :public Init
+class CartoonObject
 {
 protected:
+    Init init;
     int currentFrame{ 1 };
     int allFrames{ 0 };
     enumObjectStatus objectStatus = enumObjectStatus::isOnScreen;
@@ -33,4 +34,5 @@ public:
         { return textureMainRects[this->currentFrame]; }
     SDL_Rect* CurrentDestRect() const 
         { return objectMainRects[this->currentFrame]; }
+    bool Init_ok() const {return init.Init_ok();}
 };
