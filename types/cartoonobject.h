@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include "texture.h"
 #include "enums/enumobjectstatus.h"
 
