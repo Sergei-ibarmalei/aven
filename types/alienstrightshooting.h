@@ -11,8 +11,10 @@ private:
 public:
     explicit AlienStrightShooting(const int StepsToShoot):
         stepsToShoot(StepsToShoot) {}
+    ~AlienStrightShooting() = default;
     void CountStepToShoot(enumObjectStatus status, const int velocity);
     bool MayShoot() const {return mayShoot;}
     void CantShoot();
+
 
 };
